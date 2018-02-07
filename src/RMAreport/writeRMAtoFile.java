@@ -8,9 +8,14 @@ package RMAreport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -45,8 +50,8 @@ public class writeRMAtoFile {
         FileOutputStream outputstream = new FileOutputStream(fileName);
         workbook.write(outputstream);
     }
-    private void writeCell(RMA_report quoObj,Row row){
-        SimpleDateFormat date = new SimpleDateFormat("MM/dd/yyyy");
+    private void writeCell(RMA_report quoObj,Row row){       
+        
         Cell cell = row.createCell(0);
         cell.setCellValue(quoObj.getSerial());
         
@@ -66,10 +71,26 @@ public class writeRMAtoFile {
         cell.setCellValue(quoObj.getCustomerProblem());
         
         cell = row.createCell(6);
-        cell.setCellValue(quoObj.getCustomerFoundissue());
+        String cusIssue= quoObj.getCustomerFoundissue();
+        if(cusIssue==null){
+            cell.setCellValue("other");
+        }else {
+            cell.setCellValue(cusIssue);
+        }
+        
         
         cell = row.createCell(7);
-        cell.setCellValue(date.format(quoObj.getReceivedDate()));
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateformat;
+            String date = String.valueOf(quoObj.getReceivedDate());
+                        dateformat = format.parse(date);
+                        SimpleDateFormat print = new SimpleDateFormat("MM/dd/yyyy");                       
+                        cell.setCellValue(print.format(dateformat));  
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ReadExcelFileToList.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
         
         cell = row.createCell(8);
         cell.setCellValue(quoObj.getShippingDate());
@@ -84,7 +105,18 @@ public class writeRMAtoFile {
         cell.setCellValue(quoObj.getSupplyer());
         
         cell = row.createCell(12);
-        cell.setCellValue(quoObj.getReturnDate());
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date dateformat = null;
+            String date = String.valueOf(quoObj.getReturnDate());
+                        if(date!=null)
+                        dateformat = format.parse(date);
+                        SimpleDateFormat print = new SimpleDateFormat("MM/dd/yyyy");                       
+                        cell.setCellValue(print.format(dateformat));  
+                    } catch (ParseException ex) {
+                        Logger.getLogger(ReadExcelFileToList.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+        
         
         cell = row.createCell(13);
         cell.setCellValue(quoObj.getRepairNote());

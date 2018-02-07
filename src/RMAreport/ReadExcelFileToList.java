@@ -8,8 +8,11 @@ package RMAreport;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
@@ -83,8 +86,10 @@ public class ReadExcelFileToList {
                             /*quoObj.setCustomerFoundissue(String.valueOf(getCellValue(cell)));
                             break;
                         case 8:*/
-                            quoObj.setReceivedDate(String.valueOf(getCellValue(cell)));
+                                             
+                        quoObj.setReceivedDate(String.valueOf(getCellValue(cell)));
                             break;
+          
                         case 8:
                             quoObj.setShippingDate(String.valueOf(getCellValue(cell)));
                             break;
