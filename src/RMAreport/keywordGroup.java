@@ -9,39 +9,33 @@ package RMAreport;
  *
  * @author Kevin
  */
-public class keywordGroup extends keyword{
-    String group;
-    String groupMem;
+public class keywordGroup {
+    String groupName;
+    String category;
 
-    public keywordGroup(String group, String groupMem, String Customerfoundissue, String Rootcause) {
-        super(Customerfoundissue, Rootcause);
-        this.group = group;
-        this.groupMem = groupMem;
-    }
-
-    public keywordGroup(String group, String groupMem) {
-        this.group = group;
-        this.groupMem = groupMem;
+    public keywordGroup(String groupName, String category) {
+        this.groupName = groupName;
+        this.category = category;
     }
 
     public keywordGroup() {
     }
 
-    public String getGroup() {
-        return group;
+    public String getGroupName() {
+        return groupName;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
     }
 
-    public String getGroupMem() {
-        return groupMem;
+    public String getCategory() {
+        return category;
     }
 
-    public void setGroupMem(String groupMem) {
-        this.groupMem = groupMem;
+    public void setCategory(String category) {
+        this.category = category;
     }
-    
+
     
 }

@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.poi.hssf.usermodel.HSSFFormulaEvaluator;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -46,6 +47,7 @@ public class writeRMAtoFile {
             Row row = sheet.createRow(rowIndex++);             
                writeCell(quote,row);
         }   
+        HSSFFormulaEvaluator.evaluateAllFormulaCells(workbook);
         
         FileOutputStream outputstream = new FileOutputStream(fileName);
         workbook.write(outputstream);
@@ -72,11 +74,11 @@ public class writeRMAtoFile {
         
         cell = row.createCell(6);
         String cusIssue= quoObj.getCustomerFoundissue();
-        if(cusIssue==null){
-            cell.setCellValue("other");
-        }else {
+        //if(cusIssue==null){
+            //cell.setCellValue("other");
+        //}else {
             cell.setCellValue(cusIssue);
-        }
+        //}
         
         
         cell = row.createCell(7);

@@ -8,6 +8,7 @@ package RMAreport;
 import java.awt.FlowLayout;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +19,9 @@ import javax.swing.JFrame;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -36,7 +40,7 @@ public class ProcessKeywords  {
     ReadExcelFileToList readFile = new ReadExcelFileToList();
     ReadExcelKeywordToList readKeyWord = new ReadExcelKeywordToList();
     List<keyword> list;
-    String path = "C:/Users/Kevin/Desktop/keyword table.xlsx";
+    String path = "C:/Users/Kevin/Desktop/book1.xlsx";
     list = readKeyWord.readExcelData(path);
     
     List<RMA_report> listR;
@@ -47,18 +51,18 @@ public class ProcessKeywords  {
     for (int i=0; i<listR.size();i++){
         String cusProb = listR.get(i).getCustomerProblem();
         
-        for (int j=0; j<list.size();j++){
-            String keyword = list.get(j).getCustomerfoundissue();           
-            if(cusProb.toLowerCase().contains(keyword.toLowerCase())){
-            listR.get(i).setCustomerFoundissue(keyword);
+        for (int j=0; j<list.size();j++){            
+            String keyword = list.get(j).getKeyword();
+            if(cusProb.toLowerCase().trim().contains(keyword.toLowerCase())){
+            listR.get(i).setCustomerFoundissue(list.get(j).getGroupName());
             continue;
             }
-             
+            //System.out.println(list.get(j).getCustomerfoundissue()); 
         
     }
     
     }
-        for (int i=0; i<listR.size();i++){
+     /*   for (int i=0; i<listR.size();i++){
         String root = listR.get(i).getRepairNote();
         
         for (int j=0; j<list.size()-9;j++){
@@ -69,7 +73,7 @@ public class ProcessKeywords  {
                    
     }
     
-    }
+    }*/
         
          FileInputStream input = new FileInputStream(new File("C:/Users/Kevin/Desktop/Forcepoint RMA report.xls"));
             
@@ -80,8 +84,10 @@ public class ProcessKeywords  {
             Logger.getLogger(ProcessKeywords.class.getName()).log(Level.SEVERE, null, ex);
         }
     /*for (int i=0;i<listR.size();i++)
-        System.out.println(listR.get(i).getRootCause());
-     */
+        System.out.println(listR.get(i).getRootCause());*/
+     
+
+    }
     }  
     }
-}
+

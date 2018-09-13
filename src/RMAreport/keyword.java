@@ -9,36 +9,32 @@ package RMAreport;
  *
  * @author Thai
  */
-public class keyword {
-    private String Customerfoundissue;
-    private String Rootcause;
+public class keyword extends keywordGroup{
+    String keyword;
 
-    public keyword(String Customerfoundissue, String Rootcause) {
-        this.Customerfoundissue = Customerfoundissue;
-        this.Rootcause = Rootcause;
+    public keyword(String keyword) {
+        this.keyword = keyword;
     }
 
-    keyword() {
-        
-    }
-
-    public String getCustomerfoundissue() {
-        return Customerfoundissue;
-    }
-
-    public void setCustomerfoundissue(String Customerfoundissue) {
-        this.Customerfoundissue = Customerfoundissue;
-    }
-
-    public String getRootcause() {
-        return Rootcause;
-    }
-
-    public void setRootcause(String Rootcause) {
-        this.Rootcause = Rootcause;
+    public keyword() {
     }
     
-    
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public String getGroupName() {
+        return groupName;
+    }
+
+    public void setGroupName(String groupName) {
+        this.groupName = groupName;
+    }
     
     
 }
